@@ -3,10 +3,11 @@ module github.com/lablabs/tflint-ruleset-whitelisted-module-sources
 go 1.20
 
 require (
+	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/hashicorp/go-getter v1.7.2
+	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/terraform-linters/tflint-plugin-sdk v0.18.0
 	github.com/terraform-linters/tflint-ruleset-terraform v0.4.0
-	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
 )
 
 require (
@@ -34,6 +35,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.17.0 // indirect
 	github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/klauspost/compress v1.15.11 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
