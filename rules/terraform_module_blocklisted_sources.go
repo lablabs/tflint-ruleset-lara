@@ -2,12 +2,7 @@ package rules
 
 import (
 	"fmt"
-	// "net/url"
-	// "path/filepath"
-	// "strings"
 	"regexp"
-
-	// "github.com/hashicorp/go-getter"
 	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-terraform/project"
