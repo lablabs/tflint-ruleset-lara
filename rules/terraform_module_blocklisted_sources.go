@@ -8,7 +8,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/go-getter"
-	// "github.com/terraform-linters/tflint-plugin-sdk/logger"
+	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-terraform/project"
 	"github.com/terraform-linters/tflint-ruleset-terraform/terraform"
@@ -16,14 +16,11 @@ import (
 
 type TerraformModuleBlocklistedSourcesRule struct {
 	tflint.DefaultRule
-	attributeName string
 }
 
 // NewTerraformModuleBlocklistedSourcesRule returns a new rule
 func NewTerraformModuleBlocklistedSourcesRule() *TerraformModuleBlocklistedSourcesRule {
-	return &TerraformModuleBlocklistedSourcesRule{
-		attributeName: "source",
-	}
+	return &TerraformModuleBlocklistedSourcesRule{}
 }
 
 type TerraformModuleBlocklistedSourcesRuleConfig struct {
@@ -32,7 +29,7 @@ type TerraformModuleBlocklistedSourcesRuleConfig struct {
 
 // Name returns the rule name
 func (r *TerraformModuleBlocklistedSourcesRule) Name() string {
-	return "terraform_module_blocklisted_source"
+	return "terraform_module_blocklisted_sources"
 }
 
 // Enabled returns whether the rule is enabled by default
@@ -46,7 +43,6 @@ func (r *TerraformModuleBlocklistedSourcesRule) Severity() tflint.Severity {
 
 func (r *TerraformModuleBlocklistedSourcesRule) Link() string {
 	return project.ReferenceLink(r.Name())
-	// return ""err
 }
 
 // Check checks whether module source is blocklisted
@@ -67,9 +63,6 @@ func (r *TerraformModuleBlocklistedSourcesRule) Check(rr tflint.Runner) error {
 	if err := runner.DecodeRuleConfig(r.Name(), &config); err != nil {
 		return err
 	}
-	// if err := strings.Contains(call.Source, config.Blocklist); err != nil {
-	// 	return err
-	// }
 
 	calls, diags := runner.GetModuleCalls()
 	if diags.HasErrors() {
@@ -80,13 +73,12 @@ func (r *TerraformModuleBlocklistedSourcesRule) Check(rr tflint.Runner) error {
 		if err := r.checkModule(runner, call, config); err != nil {
 			return err
 		}
-		// logger.Info("YIIII", config.Blocklist )
+		logger.Info("Found module " + call.Name + " with source " + call.Source)
 	}
 	return nil
 }
 
 func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner, module *terraform.ModuleCall, config TerraformModuleBlocklistedSourcesRuleConfig) error {
-	// logger.Info(fmt.Sprintf("MODULE SOURCE %s", module.Source))
 	source, err := getter.Detect(module.Source, filepath.Dir(module.DefRange.Filename), []getter.Detector{
 		// https://github.com/hashicorp/terraform/blob/51b0aee36cc2145f45f5b04051a01eb6eb7be8bf/internal/getmodules/getter.go#L30-L52
 		new(getter.GitHubDetector),
@@ -112,9 +104,9 @@ func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner
 		if err != nil {
 			return err
 		}
-
 		u.RawQuery = query
 	}
+
 	for _, blocked := range config.Blocklist {
 		if regexp.MustCompile(blocked).MatchString(module.Source) {
 			return runner.EmitIssue(
@@ -128,5 +120,3 @@ func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner
 	return nil
 
 }
-
-// # tflint-ignore: terraform_module_blocklisted_source
