@@ -17,7 +17,7 @@ plugin "lara" {
   enabled = true
 
   version = "1.0.0"
-  source  = "github.com/terraform-linters/tflint-ruleset-lara"
+  source  = "github.com/lablabs/tflint-ruleset-lara"
 
     signing_key = <<-KEY
     -----BEGIN PGP PUBLIC KEY BLOCK-----
