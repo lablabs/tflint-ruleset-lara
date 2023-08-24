@@ -59,7 +59,7 @@ func (r *TerraformModuleBlocklistedSourcesRule) Check(rr tflint.Runner) error {
 	}
 
 	config := TerraformModuleBlocklistedSourcesRuleConfig{}
-	config.Blocklist = append(config.Blocklist, "git::https://github.com/lablabs/")
+	config.Blocklist = append(config.Blocklist, "^git::https://github.com/lablabs/")
 	if err := runner.DecodeRuleConfig(r.Name(), &config); err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner
 	}
 
 	for _, blocked := range config.Blocklist {
-		if regexp.MustCompile(blocked).MatchString(module.Source) {
+		if regexp.MustCompile(string(blocked)).MatchString(module.Source) {
 			return runner.EmitIssue(
 				r,
 				fmt.Sprintf("Module source %s is in the block list.", module.Source),

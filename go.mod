@@ -1,4 +1,4 @@
-module github.com/lablabs/tflint-ruleset-blocklisted-module-sources
+module github.com/lablabs/tflint-ruleset-lara
 
 go 1.20
 
