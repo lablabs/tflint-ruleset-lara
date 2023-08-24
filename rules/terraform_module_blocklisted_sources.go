@@ -2,12 +2,12 @@ package rules
 
 import (
 	"fmt"
-	"net/url"
-	"path/filepath"
-	"strings"
+	// "net/url"
+	// "path/filepath"
+	// "strings"
 	"regexp"
 
-	"github.com/hashicorp/go-getter"
+	// "github.com/hashicorp/go-getter"
 	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-terraform/project"
@@ -79,33 +79,6 @@ func (r *TerraformModuleBlocklistedSourcesRule) Check(rr tflint.Runner) error {
 }
 
 func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner, module *terraform.ModuleCall, config TerraformModuleBlocklistedSourcesRuleConfig) error {
-	source, err := getter.Detect(module.Source, filepath.Dir(module.DefRange.Filename), []getter.Detector{
-		// https://github.com/hashicorp/terraform/blob/51b0aee36cc2145f45f5b04051a01eb6eb7be8bf/internal/getmodules/getter.go#L30-L52
-		new(getter.GitHubDetector),
-		new(getter.GitDetector),
-		new(getter.BitBucketDetector),
-		new(getter.GCSDetector),
-		new(getter.S3Detector),
-		new(getter.FileDetector),
-	})
-	if err != nil {
-		return err
-	}
-
-	u, err := url.Parse(source)
-	if err != nil {
-		return err
-	}
-
-	if u.Opaque != "" {
-		// for git:: or hg:: pseudo-URLs, Opaque is :https, but query will still be parsed
-		query := u.RawQuery
-		u, err = url.Parse(strings.TrimPrefix(u.Opaque, ":"))
-		if err != nil {
-			return err
-		}
-		u.RawQuery = query
-	}
 
 	for _, blocked := range config.Blocklist {
 		if regexp.MustCompile(string(blocked)).MatchString(module.Source) {
