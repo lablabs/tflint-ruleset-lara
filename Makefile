@@ -8,4 +8,4 @@ build:
 
 install: build
 	mkdir -p ~/.tflint.d/plugins
-	mv ./tflint-ruleset-whitelisted-module-sources ~/.tflint.d/plugins
+	mv ./tflint-ruleset-blocklisted-module-sources ~/.tflint.d/plugins

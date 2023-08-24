@@ -1,12 +1,11 @@
-module github.com/lablabs/tflint-ruleset-whitelisted-module-sources
+module github.com/lablabs/tflint-ruleset-blocklisted-module-sources
 
 go 1.20
 
 require (
-	github.com/hashicorp/go-getter v1.7.2
+	github.com/hashicorp/go-getter v1.7.1
 	github.com/terraform-linters/tflint-plugin-sdk v0.18.0
 	github.com/terraform-linters/tflint-ruleset-terraform v0.4.0
-	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
 )
 
 require (
