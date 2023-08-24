@@ -1,7 +1,7 @@
-# TFLint Ruleset Template
-[![Build Status](https://github.com/terraform-linters/tflint-ruleset-template/workflows/build/badge.svg?branch=main)](https://github.com/terraform-linters/tflint-ruleset-template/actions)
+# TFLint Ruleset LARA
+[![Build Status](https://github.com/lablabs/tflint-ruleset-lara/workflows/build/badge.svg?branch=main)](https://github.com/terraform-linters/tflint-ruleset-lara/actions)
 
-This is a template repository for building a custom ruleset. You can create a plugin repository from "Use this template". See also [Writing Plugins](https://github.com/terraform-linters/tflint/blob/master/docs/developer-guide/plugins.md).
+This is a repository with LARA tflint ruleset.
 
 ## Requirements
 
@@ -10,16 +10,14 @@ This is a template repository for building a custom ruleset. You can create a pl
 
 ## Installation
 
-TODO: This template repository does not contain release binaries, so this installation will not work. Please rewrite for your repository. See the "Building the plugin" section to get this template ruleset working.
-
 You can install the plugin with `tflint --init`. Declare a config in `.tflint.hcl` as follows:
 
 ```hcl
-plugin "template" {
+plugin "lara" {
   enabled = true
 
   version = "0.1.0"
-  source  = "github.com/terraform-linters/tflint-ruleset-template"
+  source  = "github.com/terraform-linters/tflint-ruleset-lara"
 
   signing_key = <<-KEY
   -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -33,32 +31,30 @@ plugin "template" {
 
 ## Rules
 
-|Name|Description|Severity|Enabled|Link|
+|Name|Description|Severity|Enabled|Docs|
 | --- | --- | --- | --- | --- |
-|aws_instance_example_type|Example rule for accessing and evaluating top-level attributes|ERROR|✔||
-|aws_s3_bucket_example_lifecycle_rule|Example rule for accessing top-level/nested blocks and attributes under the blocks|ERROR|✔||
-|google_compute_ssl_policy|Example rule with a custom rule config|WARNING|✔||
-|terraform_backend_type|Example rule for accessing other than resources|ERROR|✔||
+|terraform_module_blocklisted_sources|Block specific TF Module Sources (regexp/path/url) |ERROR|✔|[yes](docs/rules/terraform_module_blocklisted_sources.md)
 
-## Building the plugin
+
+## Building the plugin local
 
 Clone the repository locally and run the following command:
 
-```
+```sh
 $ make
 ```
 
 You can easily install the built plugin with the following:
 
-```
+```sh
 $ make install
 ```
 
 You can run the built plugin like the following:
 
-```
+```sh
 $ cat << EOS > .tflint.hcl
-plugin "template" {
+plugin "lara" {
   enabled = true
 }
 EOS
