@@ -3,9 +3,9 @@ package rules
 import (
 	"fmt"
 	"regexp"
+	"github.com/lablabs/tflint-ruleset-lara/project"
 	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
-	"github.com/terraform-linters/tflint-ruleset-terraform/project"
 	"github.com/terraform-linters/tflint-ruleset-terraform/terraform"
 )
 
