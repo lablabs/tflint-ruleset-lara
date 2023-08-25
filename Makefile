@@ -8,4 +8,4 @@ build:
 
 install: build
 	mkdir -p ~/.tflint.d/plugins
-	mv ./tflint-ruleset-template ~/.tflint.d/plugins
+	mv ./tflint-ruleset-lara ~/.tflint.d/plugins
