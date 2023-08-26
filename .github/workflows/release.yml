@@ -3,8 +3,7 @@ name: release
 on:
   push:
     branches:
-    # - '!*'
-    - feat/cosign
+    - '!*'
     tags:
     - v*.*.*
 
