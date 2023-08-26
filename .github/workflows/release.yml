@@ -3,7 +3,8 @@ name: release
 on:
   push:
     branches:
-    - '!*'
+    # - '!*'
+    - feat/cosign
     tags:
     - v*.*.*
 
@@ -17,21 +18,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version-file: 'go.mod'
-    - name: Import GPG key
-      id: import_gpg
-      uses: crazy-max/ghaction-import-gpg@v5
-      with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
+        cache: true
+    - name: Install Cosign
+      uses: sigstore/cosign-installer@v3
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v4
       with:
-        version: latest
+        version: v1.20.0
         args: release --rm-dist
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
