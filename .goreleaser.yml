@@ -27,14 +27,5 @@ checksum:
   extra_files:
     - glob: ./dist/raw/*
 signs:
-  - cmd: cosign
-    signature: '${artifact}.keyless.sig'
-    certificate: '${artifact}.pem'
-    output: true
-    artifacts: checksum
-    args:
-      - sign-blob
-      - '--output-certificate=${certificate}'
-      - '--output-signature=${signature}'
-      - '${artifact}'
-      - --yes
+  - artifacts: checksum
+    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
