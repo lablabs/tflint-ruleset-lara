@@ -1,4 +1,5 @@
 # TFLint Ruleset LARA
+
 [![Build Status](https://github.com/lablabs/tflint-ruleset-lara/workflows/build/badge.svg?branch=main)](https://github.com/terraform-linters/tflint-ruleset-lara/actions)
 
 This is a repository with LARA tflint ruleset.
@@ -6,7 +7,7 @@ This is a repository with LARA tflint ruleset.
 ## Requirements
 
 - TFLint v0.42+
-- Go v1.20
+- Go v1.23
 
 ## Installation
 
@@ -16,7 +17,7 @@ You can install the plugin with `tflint --init`. Declare a config in `.tflint.hc
 plugin "lara" {
   enabled = true
 
-  version = "1.0.0"
+  version = "1.1.0"
   source  = "github.com/lablabs/tflint-ruleset-lara"
 
     signing_key = <<-KEY
@@ -58,20 +59,20 @@ plugin "lara" {
 |Name|Description|Severity|Enabled|Docs|
 | --- | --- | --- | --- | --- |
 |terraform_module_blocklisted_sources|Block specific TF Module Sources (regexp/path/url) |ERROR|✔|[yes](docs/rules/terraform_module_blocklisted_sources.md)
-
+|terraform_backwards_compatibility|Check code compatibility against Terraform version |ERROR|✔|[yes](docs/rules/terraform_backwards_compatibility.md)
 
 ## Building the plugin local
 
 Clone the repository locally and run the following command:
 
 ```sh
-$ make
+make
 ```
 
 You can easily install the built plugin with the following:
 
 ```sh
-$ make install
+make install
 ```
 
 You can run the built plugin like the following:

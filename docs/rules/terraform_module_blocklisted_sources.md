@@ -2,7 +2,6 @@
 
 Disallow specific Terraform module sources.
 
-
 ## Configuration
 
 Name | Default | Value
@@ -10,8 +9,8 @@ Name | Default | Value
 enabled | true | Boolean
 blocklist | `["^git::https://github.com/lablabs"]`| list of regexps/strings
 
-> **Note**  
-> To exclude specific Terraform module from being checked by this rule, add following comment above the module code in the terraform file.  
+> **Note**
+> To exclude specific Terraform module from being checked by this rule, add following comment above the module code in the terraform file.
 > `# tflint-ignore: terraform_module_blocklisted_source`
 
 ## Example

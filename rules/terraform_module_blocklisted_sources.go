@@ -3,6 +3,7 @@ package rules
 import (
 	"fmt"
 	"regexp"
+
 	"github.com/lablabs/tflint-ruleset-lara/project"
 	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
@@ -70,11 +71,11 @@ func (r *TerraformModuleBlocklistedSourcesRule) Check(rr tflint.Runner) error {
 		}
 		logger.Info("Found module " + call.Name + " with source " + call.Source)
 	}
+
 	return nil
 }
 
 func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner, module *terraform.ModuleCall, config TerraformModuleBlocklistedSourcesRuleConfig) error {
-
 	for _, blocked := range config.Blocklist {
 		if regexp.MustCompile(string(blocked)).MatchString(module.Source) {
 			return runner.EmitIssue(
@@ -86,5 +87,4 @@ func (r *TerraformModuleBlocklistedSourcesRule) checkModule(runner tflint.Runner
 	}
 
 	return nil
-
 }
