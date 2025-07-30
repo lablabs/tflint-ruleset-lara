@@ -67,7 +67,7 @@ func (r *TerraformBackwardsCompatibilityRule) config(runner tflint.Runner) (*ter
 	return config, nil
 }
 
-// Check checks whether module source is blocklisted
+// Check checks whether source code is backwards compatible with the specified Terraform version
 func (r *TerraformBackwardsCompatibilityRule) Check(runner tflint.Runner) error {
 	path, err := runner.GetModulePath()
 	if err != nil {
@@ -108,9 +108,11 @@ func (r *TerraformBackwardsCompatibilityRule) Check(runner tflint.Runner) error 
 		if err != nil {
 			return err
 		}
-
 		// cleanup directory after validation
-		defer os.RemoveAll(".terraform.lock.hcl")
+		defer func() {
+			os.RemoveAll(".terraform")
+			os.RemoveAll(".terraform.lock.hcl")
+		}()
 	}
 
 	output, err := tf.Validate(r.ctx)
