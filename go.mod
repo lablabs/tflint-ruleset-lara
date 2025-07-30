@@ -5,6 +5,7 @@ go 1.23.0
 toolchain go1.24.3
 
 require (
+	github.com/hashicorp/terraform-json v0.24.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.18.0
 	github.com/terraform-linters/tflint-ruleset-terraform v0.4.0
 )
@@ -16,7 +17,6 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.7 // indirect
-	github.com/hashicorp/terraform-json v0.24.0 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
 	golang.org/x/crypto v0.35.0 // indirect
 	golang.org/x/mod v0.24.0 // indirect
@@ -33,7 +33,7 @@ require (
 	github.com/hashicorp/go-plugin v1.4.10 // indirect
 	github.com/hashicorp/go-version v1.7.0
 	github.com/hashicorp/hc-install v0.9.2
-	github.com/hashicorp/hcl/v2 v2.17.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.17.0
 	github.com/hashicorp/terraform-exec v0.23.0
 	github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
